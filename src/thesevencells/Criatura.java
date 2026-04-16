@@ -1,26 +1,37 @@
 package thesevencells;
 
-
 public class Criatura {
-    
+
     private String nome;
-    private Habitat localizacao;
+    private Habitat habitat;
     private int vida;
-    private int fome;
     private int energia;
 
-    public Criatura(String nome, int vida, int fome, int energia) {
+    public Criatura(String nome, Habitat habitat, int vida, int energia) {
         this.nome = nome;
+        this.habitat = habitat;
         this.vida = vida;
-        this.fome = fome;
-        this.energia = energia;
+        setEnergia(energia);
     }
-    
-    public void comer(int energia){
+
+    public void comer() {
+        int recurso = habitat.getQntrecursos();
         
+        if (recurso > 1) {
+            System.out.println("Comendo");
+            habitat.setQntrecursos(-1);
+            this.energia = getEnergia()+1;
+        }
     }
-    public void mover(){
-        
+
+    public void dano() {
+        if (getEnergia() < getEnergia() * (10 / 100)) {
+            setVida(-1);
+        }
+    }
+
+    public void mover() {
+
     }
 
     public String getNome() {
@@ -31,12 +42,12 @@ public class Criatura {
         this.nome = nome;
     }
 
-    public Habitat getLocalizacao() {
-        return localizacao;
+    public Habitat gethabitat() {
+        return habitat;
     }
 
-    public void setLocalizacao(Habitat localizacao) {
-        this.localizacao = localizacao;
+    public void sethabitat(Habitat habitat) {
+        this.habitat = habitat;
     }
 
     public int getVida() {
@@ -47,21 +58,19 @@ public class Criatura {
         this.vida = vida;
     }
 
-    public int getFome() {
-        return fome;
-    }
-
-    public void setFome(int fome) {
-        this.fome = fome;
-    }
-
     public int getEnergia() {
         return energia;
     }
 
     public void setEnergia(int energia) {
+        if(getEnergia() < getEnergia()*(30/100)){
+            comer();
+        }else{
         this.energia = energia;
+        }
     }
-    
-}
 
+    public void informações() {
+        System.out.println("\nNome: " + getNome() + " \nVida: " + getVida() + "\nEnergia: " + getEnergia() + "\nHabitat: " + habitat.getNome());
+    }
+}
