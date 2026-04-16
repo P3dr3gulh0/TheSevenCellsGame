@@ -11,7 +11,7 @@ public class Criatura {
         this.nome = nome;
         this.habitat = habitat;
         this.vida = vida;
-        setEnergia(energia);
+        this.energia = energia;
     }
 
     public void comer() {
@@ -63,10 +63,11 @@ public class Criatura {
     }
 
     public void setEnergia(int energia) {
-        if(getEnergia() < getEnergia()*(30/100)){
+        if(this.energia < (getEnergia()*0.4)){
+            System.out.println("Ble.");
             comer();
         }else{
-        this.energia = energia;
+            this.energia = energia;
         }
     }
 
