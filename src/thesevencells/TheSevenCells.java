@@ -8,11 +8,15 @@ public class TheSevenCells {
 
         Criatura criatura1 = new Criatura("Archea", habitat1, 10, 10);
 
-        criatura1.informações();
-        criatura1.setEnergia(3);
-        criatura1.informações();
-        
+        for (int i = 0; i < 10; i++) {
+            
+            if (criatura1.getEnergia() < 4) {
+                criatura1.comer();
+            }
+
+            criatura1.informações();
+            criatura1.mover();
+        }
 
     }
-
 }
