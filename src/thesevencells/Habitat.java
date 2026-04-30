@@ -1,22 +1,35 @@
 package thesevencells;
 
-
 public class Habitat {
-    
+
     private String nome;
     private int localizacao;
-    private int qntrecursos;
+    private double qntrecursosTotal;
+    private double qntrecursosAtual;
     private int dificuldade;
 
-    public Habitat(String nome, int localizacao, int qntrecursos, int dificuldade) {
+    public Habitat(String nome, int localizacao, double qntrecursos, int dificuldade) {
         this.nome = nome;
         this.localizacao = localizacao;
-        this.qntrecursos = qntrecursos;
+        this.qntrecursosTotal = qntrecursos;
+        this.qntrecursosAtual = qntrecursos;
         this.dificuldade = dificuldade;
     }
 
-    
-    
+    public void gerirRecurso(double entrada) {
+        if (entrada < 0) {
+            setQntrecursosAtual(getQntrecursosAtual() + entrada);
+        }
+        if (entrada >= 0) {
+            setQntrecursosAtual(getQntrecursosAtual() + (entrada));
+        }
+    }
+
+    public String informações() {
+        String info = ("\nNome: " + getNome() + " Recurso: " + getQntrecursosAtual());
+        return info;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -33,12 +46,20 @@ public class Habitat {
         this.localizacao = localizacao;
     }
 
-    public int getQntrecursos() {
-        return qntrecursos;
+    public double getQntrecursosTotal() {
+        return qntrecursosTotal;
     }
 
-    public void setQntrecursos(int qntrecursos) {
-        this.qntrecursos = qntrecursos;
+    public void setQntrecursosTotal(double qntrecursosTotal) {
+        this.qntrecursosTotal = qntrecursosTotal;
+    }
+
+    public double getQntrecursosAtual() {
+        return qntrecursosAtual;
+    }
+
+    public void setQntrecursosAtual(double qntrecursosAtual) {
+        this.qntrecursosAtual = qntrecursosAtual;
     }
 
     public int getDificuldade() {
@@ -48,6 +69,5 @@ public class Habitat {
     public void setDificuldade(int dificuldade) {
         this.dificuldade = dificuldade;
     }
-    
-    
+
 }

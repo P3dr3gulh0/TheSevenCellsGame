@@ -14,29 +14,31 @@ public class Criatura {
         this.nome = nome;
         this.habitat = habitat;
         this.vidaTotal = vidaTotal;
+        this.vidaAtual = vidaTotal;
         this.energiaTotal = energiaTotal;
+        this.energiaAtual = energiaTotal;
     }
 
 
 
-    public void viver() {
-        
-        if (getEnergiaAtual() <= (getEnergiaTotal() * 0.4)) {
-            comer();
-        }
-        if (getEnergiaAtual() <= (getEnergiaTotal() * 0.2)) {
-            dano();
-        }
-        mover();
-
-    }
+//    public void viver() {
+//        
+//        if (getEnergiaAtual() <= (getEnergiaTotal() * 0.4)) {
+//            comer();
+//        }
+//        if (getEnergiaAtual() <= (getEnergiaTotal() * 0.2)) {
+//            dano();
+//        }
+//        mover();
+//
+//    }
 
     public void comer() {
-        int recurso = habitat.getQntrecursos();
+        double recurso = getHabitat().getQntrecursosAtual();
 
         if (recurso > 0) {
             System.out.println("Comendo");
-            habitat.setQntrecursos(habitat.getQntrecursos() - 1);
+            getHabitat().gerirRecurso(-3);
             setEnergiaAtual(getEnergiaAtual() + 1);
         } else {
             System.out.println("Sem comida por perto!");
@@ -46,6 +48,7 @@ public class Criatura {
     public void dano() {
         setVidaAtual(getVidaAtual() - 1);
         System.out.println("Tomou dano!");
+ 
     }
 
     public void mover() {
@@ -59,8 +62,10 @@ public class Criatura {
         }
     }
 
-    public void informações() {
-        System.out.println("\nNome: " + getNome() + " \nVida: " + getVidaAtual()+ "\nEnergia: " + getEnergiaAtual()+ "\nHabitat: " + habitat.getNome());
+    public String informações() {
+        
+        String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual()+ "\nEnergia: " + getEnergiaAtual()+ "\nHabitat: " + habitat.getNome());
+        return info;
     }
 
     public String getNome() {
