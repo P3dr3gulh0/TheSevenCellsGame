@@ -3,16 +3,14 @@ package thesevencells;
 public class Criatura {
 
     private String nome;
-    private Habitat habitat;
     private int vidaTotal;
     private int vidaAtual;
     private int energiaTotal;
     private int energiaAtual;
     public boolean vivo = true;
 
-    public Criatura(String nome, Habitat habitat, int vidaTotal, int energiaTotal) {
+    public Criatura(String nome, int vidaTotal, int energiaTotal) {
         this.nome = nome;
-        this.habitat = habitat;
         this.vidaTotal = vidaTotal;
         this.vidaAtual = vidaTotal;
         this.energiaTotal = energiaTotal;
@@ -33,17 +31,17 @@ public class Criatura {
 //
 //    }
 
-    public void comer() {
-        double recurso = getHabitat().getQntrecursosAtual();
-
-        if (recurso > 0) {
-            System.out.println("Comendo");
-            getHabitat().gerirRecurso(-3);
-            setEnergiaAtual(getEnergiaAtual() + 1);
-        } else {
-            System.out.println("Sem comida por perto!");
-        }
-    }
+//    public void comer() {
+//        double recurso = getHabitat().getQntrecursosAtual();
+//
+//        if (recurso > 0) {
+//            System.out.println("Comendo");
+//            getHabitat().gerirRecurso(-3);
+//            setEnergiaAtual(getEnergiaAtual() + 1);
+//        } else {
+//            System.out.println("Sem comida por perto!");
+//        }
+//    }
 
     public void dano() {
         setVidaAtual(getVidaAtual() - 1);
@@ -51,20 +49,19 @@ public class Criatura {
  
     }
 
-    public void mover() {
-        int dificuldade = habitat.getDificuldade();
-
-        if (getEnergiaAtual() < dificuldade) {
-            System.out.println("Pouca energia, sem possibilidade de movimento!");
-        } else {
-            System.out.println("Criatura se movendo!");
-            setEnergiaAtual(getEnergiaAtual() - dificuldade);
-        }
-    }
+//    public void mover() {
+//
+//        if (getEnergiaAtual() < dificuldade) {
+//            System.out.println("Pouca energia, sem possibilidade de movimento!");
+//        } else {
+//            System.out.println("Criatura se movendo!");
+//            setEnergiaAtual(getEnergiaAtual() - dificuldade);
+//        }
+//    }
 
     public String informações() {
         
-        String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual()+ "\nEnergia: " + getEnergiaAtual()+ "\nHabitat: " + habitat.getNome());
+        String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual()+ "\nEnergia: " + getEnergiaAtual());
         return info;
     }
 
@@ -74,14 +71,6 @@ public class Criatura {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Habitat getHabitat() {
-        return habitat;
-    }
-
-    public void setHabitat(Habitat habitat) {
-        this.habitat = habitat;
     }
 
     public int getVidaTotal() {
