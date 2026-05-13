@@ -7,53 +7,44 @@ public class TheSevenCells {
 
     public static void main(String[] args) {
 
-
         int cont = 1;
         while (true) {
-            existencia(cont, gerarHabitats("Selva", 1, 10, 2), gerarCriaturas(nome, habitat, cont, cont));
+            existencia(cont, gerarHabitats("Selva", 1, 10, 2), gerarCriaturas("Archea", cont, cont));
             cont++;
         }
 
     }
 
-    public static void existencia(int dias, ArrayList habitat, ArrayList criaturas) {
+    public static void existencia(int dias, ArrayList<Habitat> habitats, ArrayList<Criatura> criaturas) {
 
-        for (Criaturas criatura : criaturas) {
+        for (Habitat habitat : habitats) {
 
-            criatura.mover();
+            for (Criatura criatura : criaturas) {
 
-            if (criatura.getEnergiaAtual() < criatura.getEnergiaTotal() * 0.4) {
-                criatura.comer();
-            }
+                String mensagem = "";
+                mensagem += "Dia um: ";
+                mensagem += "Dados do habitat: "+habitat.informações()+"\n";
+                mensagem += "Dados da Criatura: "+ criatura.informações();
+                
 
-            if (criatura.getEnergiaAtual() < criatura.getEnergiaTotal() * 0.2) {
-                criatura.dano();
-            }
-
-            habitat1.gerirRecurso(0.5);
-
-            JOptionPane.showMessageDialog(null, criatura.informações(), dias + "° Dia", JOptionPane.PLAIN_MESSAGE);
-            JOptionPane.showMessageDialog(null, habitat1.informações(), dias + "° Dia", JOptionPane.PLAIN_MESSAGE);
-
-            if (criatura.getVidaAtual() < 1) {
-                System.exit(0);
+                JOptionPane.showMessageDialog(null, mensagem);
             }
         }
     }
 
     public static ArrayList gerarHabitats(String nome, int localizacao, double qntrecursos, int dificuldade) {
         ArrayList<Habitat> habitats = new ArrayList();
-        
+
         Habitat habitat = new Habitat(nome, localizacao, qntrecursos, dificuldade);
-        
+
         habitats.add(habitat);
-        
+
         return habitats;
     }
 
-    public static ArrayList gerarCriaturas(String nome, int vidaTotal,int energiaTotal) {
+    public static ArrayList gerarCriaturas(String nome, int vidaTotal, int energiaTotal) {
         ArrayList<Criatura> criaturas = new ArrayList();
-        
+
         Criatura cria = new Criatura(nome, vidaTotal, energiaTotal);
         criaturas.add(cria);
         return criaturas;
