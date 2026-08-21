@@ -1,28 +1,26 @@
 package thesevencells;
 
-public class Habitat {
+public class HabitatModel {
 
     private String nome;
-    private int localizacao;
+    private int idHabitat;
+    private int tamanho;
     private double qntrecursosTotal;
     private double qntrecursosAtual;
     private int dificuldade;
+    private int qntCriaturas;
 
-    public Habitat(String nome, int localizacao, double qntrecursos, int dificuldade) {
+    public HabitatModel(String nome, int localizacao, int tamanho, double qntrecursosTotal, int dificuldade) {
         this.nome = nome;
-        this.localizacao = localizacao;
-        this.qntrecursosTotal = qntrecursos;
-        this.qntrecursosAtual = qntrecursos;
+        this.idHabitat = localizacao;
+        this.tamanho = tamanho;
+        this.qntrecursosTotal = qntrecursosTotal;
         this.dificuldade = dificuldade;
     }
 
-    public void gerirRecurso(double entrada) {
-        if (entrada < 0) {
-            setQntrecursosAtual(getQntrecursosAtual() + entrada);
-        }
-        if (entrada >= 0) {
-            setQntrecursosAtual(getQntrecursosAtual() + (entrada));
-        }
+    public void gerarRecurso() {
+        setQntrecursosAtual(getQntrecursosAtual() + 1);
+        System.out.println("Habitat " + getNome() + "Gerou um recurso");
     }
 
     public String informações() {
@@ -38,12 +36,12 @@ public class Habitat {
         this.nome = nome;
     }
 
-    public int getLocalizacao() {
-        return localizacao;
+    public int getIdHabitat() {
+        return idHabitat;
     }
 
-    public void setLocalizacao(int localizacao) {
-        this.localizacao = localizacao;
+    public void setIdHabitat(int idHabitat) {
+        this.idHabitat = idHabitat;
     }
 
     public double getQntrecursosTotal() {

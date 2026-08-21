@@ -1,6 +1,6 @@
 package thesevencells;
 
-public class Criatura {
+public class CriaturaModel {
 
     private String nome;
     private int vidaTotal;
@@ -9,7 +9,7 @@ public class Criatura {
     private int energiaAtual;
     public boolean vivo = true;
 
-    public Criatura(String nome, int vidaTotal, int energiaTotal) {
+    public CriaturaModel(String nome, int vidaTotal, int energiaTotal) {
         this.nome = nome;
         this.vidaTotal = vidaTotal;
         this.vidaAtual = vidaTotal;
@@ -17,47 +17,25 @@ public class Criatura {
         this.energiaAtual = energiaTotal;
     }
 
+    public void comer(int recurso) {
 
-
-//    public void viver() {
-//        
-//        if (getEnergiaAtual() <= (getEnergiaTotal() * 0.4)) {
-//            comer();
-//        }
-//        if (getEnergiaAtual() <= (getEnergiaTotal() * 0.2)) {
-//            dano();
-//        }
-//        mover();
-//
-//    }
-
-//    public void comer() {
-//        double recurso = getHabitat().getQntrecursosAtual();
-//
-//        if (recurso > 0) {
-//            System.out.println("Comendo");
-//            getHabitat().gerirRecurso(-3);
-//            setEnergiaAtual(getEnergiaAtual() + 1);
-//        } else {
-//            System.out.println("Sem comida por perto!");
-//        }
-//    }
-
-    public void dano() {
-        setVidaAtual(getVidaAtual() - 1);
-        System.out.println("Tomou dano!");
- 
+        if (recurso > 0) {
+            System.out.println("Comendo");
+            setEnergiaAtual(getEnergiaAtual() + recurso);
+        } else {
+            System.out.println("Sem comida por perto!");
+        }
     }
 
-//    public void mover() {
-//
-//        if (getEnergiaAtual() < dificuldade) {
-//            System.out.println("Pouca energia, sem possibilidade de movimento!");
-//        } else {
-//            System.out.println("Criatura se movendo!");
-//            setEnergiaAtual(getEnergiaAtual() - dificuldade);
-//        }
-//    }
+    public void mover(int HabitatDificuldade) {
+
+        if (getEnergiaAtual() < HabitatDificuldade) {
+            System.out.println("A Criatura "+ getNome() +" não tem energia para se mover");
+        } else {
+            System.out.println("Criatura se moveu!");
+            setEnergiaAtual(getEnergiaAtual() - HabitatDificuldade);
+        }
+    }
 
     public String informações() {
         
