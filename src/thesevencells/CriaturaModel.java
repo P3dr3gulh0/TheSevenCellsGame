@@ -7,7 +7,7 @@ public class CriaturaModel {
     private int vidaAtual;
     private int energiaTotal;
     private int energiaAtual;
-    public boolean vivo = true;
+    private boolean vivo = true;
 
     public CriaturaModel(String nome, int vidaTotal, int energiaTotal) {
         this.nome = nome;
@@ -29,17 +29,18 @@ public class CriaturaModel {
 
     public void mover(int HabitatDificuldade) {
 
-        if (getEnergiaAtual() < HabitatDificuldade) {
-            System.out.println("A Criatura "+ getNome() +" não tem energia para se mover");
-        } else {
+        if (getEnergiaAtual() > HabitatDificuldade) {
             System.out.println("Criatura se moveu!");
             setEnergiaAtual(getEnergiaAtual() - HabitatDificuldade);
+
+        } else {
+            System.out.println("A Criatura " + getNome() + " não tem energia para se mover");
         }
     }
 
     public String informações() {
-        
-        String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual()+ "\nEnergia: " + getEnergiaAtual());
+
+        String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual());
         return info;
     }
 
@@ -91,5 +92,3 @@ public class CriaturaModel {
         this.vivo = vivo;
     }
 }
-
- 
