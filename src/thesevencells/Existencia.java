@@ -8,27 +8,15 @@ public class Existencia {
     public static void main(String[] args) {
 
         Mundo mundo1 = new Mundo(0);
-        int cont = 1;
-        HabitatModel selva = gerarHabitats("Selva", 1, 10, 10, 2);
-        gerarCriaturas("Archea", 10, 10);
+        CriaturaModel criatura1 = new CriaturaModel("Archea", 10, 10);
+        HabitatModel habitat1 = new HabitatModel("Selva", 1, 10, 10, 2);
+        
+        mundo1.gerar(habitat1, criatura1);
 
         while (mundo1.getDia() < 5) {
-            mundo1.contagemDia();
-            selva.gerarRecurso();
+            
         }
     }
 
-    public static HabitatModel gerarHabitats(String nome, int localizacao, int tamanho, double qntrecursos, int dificuldade) {
 
-        HabitatModel habitat = new HabitatModel(nome, localizacao, tamanho, qntrecursos, dificuldade);
-
-        return habitat;
-    }
-
-    public static CriaturaModel gerarCriaturas(String nome, int vidaTotal, int energiaTotal) {
-
-        CriaturaModel cria = new CriaturaModel(nome, vidaTotal, energiaTotal);
-
-        return cria;
-    }
 }

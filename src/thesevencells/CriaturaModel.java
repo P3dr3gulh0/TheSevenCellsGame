@@ -17,25 +17,35 @@ public class CriaturaModel {
         this.energiaAtual = energiaTotal;
     }
 
-    public void comer(int recurso) {
-
-        if (recurso > 0) {
-            System.out.println("Comendo");
-            setEnergiaAtual(getEnergiaAtual() + recurso);
-        } else {
-            System.out.println("Sem comida por perto!");
+    public void ganharEnergia(int valor) {
+        if (valor > 0) {
+            setEnergiaAtual(getEnergiaAtual() + valor);
         }
     }
 
-    public void mover(int HabitatDificuldade) {
-
-        if (getEnergiaAtual() > HabitatDificuldade) {
-            System.out.println("Criatura se moveu!");
-            setEnergiaAtual(getEnergiaAtual() - HabitatDificuldade);
-
-        } else {
-            System.out.println("A Criatura " + getNome() + " não tem energia para se mover");
+    public void perderEnergia(int valor) {
+        if (valor > 0) {
+            setEnergiaAtual(getEnergiaAtual() - valor);
         }
+    }
+    
+    public void comer(int valor){
+        if(isVivo()){
+            System.out.println("Criatura comeu!");
+            ganharEnergia(valor);
+        }
+    }
+    public void mover(int HabitatDificuldade) {
+        if(isVivo()){
+            if (getEnergiaAtual() > HabitatDificuldade) {
+                System.out.println("Criatura se moveu!");
+                setEnergiaAtual(getEnergiaAtual() - HabitatDificuldade);
+
+            } else {
+                System.out.println("A Criatura " + getNome() + " não tem energia para se mover");
+            }
+        }
+        
     }
 
     public String informações() {
