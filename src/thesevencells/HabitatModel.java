@@ -1,6 +1,6 @@
 package thesevencells;
 
-public class HabitatModel {
+    public class HabitatModel {
 
     private String nome;
     private int idHabitat;
@@ -16,6 +16,7 @@ public class HabitatModel {
         this.tamanho = tamanho;
         this.qntrecursosTotal = qntrecursosTotal;
         this.dificuldade = dificuldade;
+        iniciarRecursosAtuais();
     }
 
     public void gerarRecurso() {
@@ -28,18 +29,41 @@ public class HabitatModel {
 
     }
 
-    public void perderRecurso(int recurso) {
+    public void perderRecurso(int valor) {
+        
         if (getQntrecursosAtual() > 0) {
-            setQntrecursosAtual(getQntrecursosAtual() - recurso);
-            System.out.println("Habitat " + getNome() + " Perdeu um recurso!");
+            setQntrecursosAtual(getQntrecursosAtual() - valor);
+            System.out.println("Habitat " + getNome() + " Perdeu "+ valor + " recurso(s)!");
+            System.out.println(getQntrecursosAtual());
         } else {
             System.out.println("Habitat sem recursos!");
         }
     }
-
+    
+    public boolean limitarEntradaRecursos(double valor){
+        double excedente = getQntrecursosAtual()+ valor  ;
+        double escassez = getQntrecursosAtual() - valor  ;
+        
+        System.out.println(excedente + "\n" + escassez);
+        System.out.println(getQntrecursosAtual());
+        if(excedente > getQntrecursosTotal()){
+            System.out.println("blee");
+            return false;
+        }
+        if(escassez < getQntrecursosTotal()){
+            System.out.println("blee2");
+            return false;
+        }
+        System.out.println("blee3");
+        return true;
+    }
     public String informações() {
         String info = ("\nNome: " + getNome() + " Recurso: " + getQntrecursosAtual());
         return info;
+    }
+    
+    public void iniciarRecursosAtuais(){
+        this.qntrecursosAtual = qntrecursosTotal;
     }
 
     public String getNome() {
@@ -71,6 +95,7 @@ public class HabitatModel {
     }
 
     public void setQntrecursosTotal(double qntrecursosTotal) {
+        
         this.qntrecursosTotal = qntrecursosTotal;
     }
 

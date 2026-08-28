@@ -13,8 +13,9 @@ public class Existencia {
         
         mundo1.gerar(habitat1, criatura1);
 
-        while (mundo1.getDia() < 5) {
-            
+        while (mundo1.getDia() < 15) {
+            mundo1.contagemDia();
+            mundo1.alimentarCriatura();
         }
     }
 

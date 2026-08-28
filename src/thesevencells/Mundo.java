@@ -11,16 +11,17 @@ public class Mundo {
     public void gerar(HabitatModel habitat1, CriaturaModel criatura1) {
         setCriatura1(criatura1);
         setHabitat1(habitat1);
+        System.out.println(getHabitat1().getQntrecursosAtual());
+        System.out.println(getCriatura1().getNome());
     }
 
     public void alimentarCriatura() {
-        int uniAlimento = 1;
+        int valor = 1;
         if (getCriatura1().isVivo()) {
-            if (getHabitat1().getQntrecursosAtual() > 0) {
-                getCriatura1().comer(uniAlimento);
-                getHabitat1().perderRecurso(uniAlimento);
+            if (getHabitat1().limitarEntradaRecursos(valor)) {
+                getCriatura1().comer(valor);
+                getHabitat1().perderRecurso(valor);
             }
-
         }
     }
 
@@ -76,3 +77,4 @@ public class Mundo {
     }
 
 }
+//
