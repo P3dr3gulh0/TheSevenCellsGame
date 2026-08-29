@@ -26,6 +26,18 @@ public class CriaturaModel {
     public void perderEnergia(int valor) {
         if (valor > 0) {
             setEnergiaAtual(getEnergiaAtual() - valor);
+            limitarEntradaRecursos();
+        }
+        if(getEnergiaAtual() <=0){
+            receberDano(1);
+        }
+    }
+    
+    public void receberDano(int valor){
+        setVidaAtual(getEnergiaAtual() - valor);
+        
+        if(getVidaAtual() < 0){
+            setVivo(false);
         }
     }
     
@@ -39,7 +51,7 @@ public class CriaturaModel {
         if(isVivo()){
             if (getEnergiaAtual() > HabitatDificuldade) {
                 System.out.println("Criatura se moveu!");
-                setEnergiaAtual(getEnergiaAtual() - HabitatDificuldade);
+                perderEnergia(HabitatDificuldade);
 
             } else {
                 System.out.println("A Criatura " + getNome() + " não tem energia para se mover");
@@ -47,11 +59,19 @@ public class CriaturaModel {
         }
         
     }
+        public void limitarEntradaRecursos(){
+        
+        if(getEnergiaAtual() > getEnergiaTotal()){
+            setEnergiaAtual(getEnergiaTotal());
+        }
+        if(getEnergiaAtual() < 0){
+            setEnergiaAtual(0);
+        }
+    }
 
     public String informações() {
 
-        String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual());
-        return info;
+        String info = ("-----------------------"+"\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual()+"\n-----------------------");        return info;
     }
 
     public String getNome() {

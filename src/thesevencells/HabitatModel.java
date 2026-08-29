@@ -23,6 +23,7 @@ package thesevencells;
         if (getQntrecursosAtual() < getQntrecursosTotal()) {
             setQntrecursosAtual(getQntrecursosAtual() + (getTamanho() / getDificuldade()));
             System.out.println("Habitat " + getNome() + "Gerou um recurso!");
+            limparExcessos();
         } else {
             System.out.println("Habitat " + getNome() + "Chegou ao limite de recursos!");
         }
@@ -34,31 +35,23 @@ package thesevencells;
         if (getQntrecursosAtual() > 0) {
             setQntrecursosAtual(getQntrecursosAtual() - valor);
             System.out.println("Habitat " + getNome() + " Perdeu "+ valor + " recurso(s)!");
-            System.out.println(getQntrecursosAtual());
+            limparExcessos();
         } else {
             System.out.println("Habitat sem recursos!");
         }
     }
     
-    public boolean limitarEntradaRecursos(double valor){
-        double excedente = getQntrecursosAtual()+ valor  ;
-        double escassez = getQntrecursosAtual() - valor  ;
+    public void limparExcessos(){
         
-        System.out.println(excedente + "\n" + escassez);
-        System.out.println(getQntrecursosAtual());
-        if(excedente > getQntrecursosTotal()){
-            System.out.println("blee");
-            return false;
+        if(getQntrecursosAtual() > getQntrecursosTotal()){
+            setQntrecursosAtual(getQntrecursosTotal());
         }
-        if(escassez < getQntrecursosTotal()){
-            System.out.println("blee2");
-            return false;
+        if(getQntrecursosAtual() < 0){
+            setQntrecursosAtual(0);
         }
-        System.out.println("blee3");
-        return true;
     }
     public String informações() {
-        String info = ("\nNome: " + getNome() + " Recurso: " + getQntrecursosAtual());
+        String info = ("-----------------------"+"\nNome: " + getNome() + "\nRecurso: " + getQntrecursosAtual()+"\n-----------------------");
         return info;
     }
     
