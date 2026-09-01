@@ -17,61 +17,73 @@ public class CriaturaModel {
         this.energiaAtual = energiaTotal;
     }
 
-    public void ganharEnergia(int valor) {
-        if (valor > 0) {
-            setEnergiaAtual(getEnergiaAtual() + valor);
+    //comportamento principal
+    public void comer(int valor) {
+        if (!isVivo()) {
+            return;
         }
+        System.out.println("Criatura comeu!");
+        ganharEnergia(valor);
+    }
+
+    public void mover(int HabitatDificuldade) {
+        if (!isVivo()){
+            return;
+        }
+
+        if (getEnergiaAtual() > HabitatDificuldade) {
+            System.out.println("Criatura se moveu!");
+            perderEnergia(HabitatDificuldade);
+        } else {
+            System.out.println("A Criatura " + getNome() + " não tem energia para se mover");
+        }
+    }
+
+    //--recursos de gerenciamento--
+    
+    //-Gerenciando Energia-
+    public void ganharEnergia(int valor) {
+        if (valor < 0) {
+            return;
+        }
+        setEnergiaAtual(getEnergiaAtual() + valor);
     }
 
     public void perderEnergia(int valor) {
-        if (valor > 0) {
-            setEnergiaAtual(getEnergiaAtual() - valor);
-            limitarEntradaRecursos();
+        if (valor < 0) {
+            return;
         }
-        if(getEnergiaAtual() <=0){
+
+        if (getEnergiaAtual() <= 0) {
             receberDano(1);
         }
-    }
-    
-    public void receberDano(int valor){
-        setVidaAtual(getEnergiaAtual() - valor);
-        
-        if(getVidaAtual() < 0){
-            setVivo(false);
-        }
-    }
-    
-    public void comer(int valor){
-        if(isVivo()){
-            System.out.println("Criatura comeu!");
-            ganharEnergia(valor);
-        }
-    }
-    public void mover(int HabitatDificuldade) {
-        if(isVivo()){
-            if (getEnergiaAtual() > HabitatDificuldade) {
-                System.out.println("Criatura se moveu!");
-                perderEnergia(HabitatDificuldade);
+        setEnergiaAtual(getEnergiaAtual() - valor);
+        limitarEnergia();
 
-            } else {
-                System.out.println("A Criatura " + getNome() + " não tem energia para se mover");
-            }
-        }
-        
     }
-        public void limitarEntradaRecursos(){
-        
-        if(getEnergiaAtual() > getEnergiaTotal()){
+
+    public void limitarEnergia() {
+        if (getEnergiaAtual() > getEnergiaTotal()) {
             setEnergiaAtual(getEnergiaTotal());
         }
-        if(getEnergiaAtual() < 0){
+        if (getEnergiaAtual() < 0) {
             setEnergiaAtual(0);
         }
     }
 
-    public String informações() {
+    //-Gerenciando vida-
+    
+    public void receberDano(int valor) {
+        setVidaAtual(getVidaAtual() - valor);
 
-        String info = ("-----------------------"+"\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual()+"\n-----------------------");        return info;
+        if (getVidaAtual() <= 0) {
+            setVivo(false);
+        }
+    }
+
+    public String informações() {
+        String info = ("-----------------------" + "\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual() );
+        return info;
     }
 
     public String getNome() {

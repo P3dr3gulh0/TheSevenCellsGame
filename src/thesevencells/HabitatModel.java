@@ -1,6 +1,6 @@
 package thesevencells;
 
-    public class HabitatModel {
+public class HabitatModel {
 
     private String nome;
     private int idHabitat;
@@ -15,48 +15,42 @@ package thesevencells;
         this.idHabitat = localizacao;
         this.tamanho = tamanho;
         this.qntrecursosTotal = qntrecursosTotal;
+        this.qntrecursosAtual = qntrecursosTotal;
         this.dificuldade = dificuldade;
-        iniciarRecursosAtuais();
     }
 
     public void gerarRecurso() {
         if (getQntrecursosAtual() < getQntrecursosTotal()) {
             setQntrecursosAtual(getQntrecursosAtual() + (getTamanho() / getDificuldade()));
             System.out.println("Habitat " + getNome() + "Gerou um recurso!");
-            limparExcessos();
+            limitarRecursos();
         } else {
             System.out.println("Habitat " + getNome() + "Chegou ao limite de recursos!");
         }
-
     }
 
     public void perderRecurso(int valor) {
-        
         if (getQntrecursosAtual() > 0) {
             setQntrecursosAtual(getQntrecursosAtual() - valor);
-            System.out.println("Habitat " + getNome() + " Perdeu "+ valor + " recurso(s)!");
-            limparExcessos();
+            System.out.println("Habitat " + getNome() + " Perdeu " + valor + " recurso(s)!");
+            limitarRecursos();
         } else {
             System.out.println("Habitat sem recursos!");
         }
     }
-    
-    public void limparExcessos(){
-        
-        if(getQntrecursosAtual() > getQntrecursosTotal()){
+
+    public void limitarRecursos() {
+        if (getQntrecursosAtual() > getQntrecursosTotal()) {
             setQntrecursosAtual(getQntrecursosTotal());
         }
-        if(getQntrecursosAtual() < 0){
+        if (getQntrecursosAtual() < 0) {
             setQntrecursosAtual(0);
         }
     }
+
     public String informações() {
-        String info = ("-----------------------"+"\nNome: " + getNome() + "\nRecurso: " + getQntrecursosAtual()+"\n-----------------------");
+        String info = ("-----------------------" + "\nNome: " + getNome() + "\nRecurso: " + getQntrecursosAtual());
         return info;
-    }
-    
-    public void iniciarRecursosAtuais(){
-        this.qntrecursosAtual = qntrecursosTotal;
     }
 
     public String getNome() {
@@ -88,7 +82,6 @@ package thesevencells;
     }
 
     public void setQntrecursosTotal(double qntrecursosTotal) {
-        
         this.qntrecursosTotal = qntrecursosTotal;
     }
 
@@ -115,5 +108,4 @@ package thesevencells;
     public void setQntCriaturas(int qntCriaturas) {
         this.qntCriaturas = qntCriaturas;
     }
-
 }
