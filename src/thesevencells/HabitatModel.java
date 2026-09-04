@@ -31,10 +31,14 @@ public class HabitatModel {
 
     public void perderRecurso(int valor) {
         if (getQntrecursosAtual() > 0) {
+            
             setQntrecursosAtual(getQntrecursosAtual() - valor);
+            
             System.out.println("Habitat " + getNome() + " Perdeu " + valor + " recurso(s)!");
+            
             limitarRecursos();
         } else {
+            
             System.out.println("Habitat sem recursos!");
         }
     }
@@ -49,7 +53,7 @@ public class HabitatModel {
     }
 
     public String informações() {
-        String info = ("-----------------------" + "\nNome: " + getNome() + "\nRecurso: " + getQntrecursosAtual());
+        String info = ("\nNome: " + getNome() + "\nRecurso: " + getQntrecursosAtual());
         return info;
     }
 

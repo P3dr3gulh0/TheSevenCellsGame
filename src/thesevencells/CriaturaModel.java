@@ -27,10 +27,9 @@ public class CriaturaModel {
     }
 
     public void mover(int HabitatDificuldade) {
-        if (!isVivo()){
+        if (!isVivo()) {
             return;
         }
-
         if (getEnergiaAtual() > HabitatDificuldade) {
             System.out.println("Criatura se moveu!");
             perderEnergia(HabitatDificuldade);
@@ -40,49 +39,72 @@ public class CriaturaModel {
     }
 
     //--recursos de gerenciamento--
-    
     //-Gerenciando Energia-
     public void ganharEnergia(int valor) {
-        if (valor < 0) {
+        if (valor <= 0) {
             return;
         }
+
         setEnergiaAtual(getEnergiaAtual() + valor);
+
+        limitarEnergia();
     }
 
     public void perderEnergia(int valor) {
         if (valor < 0) {
             return;
         }
+        setEnergiaAtual(getEnergiaAtual() - valor);
 
         if (getEnergiaAtual() <= 0) {
-            receberDano(1);
+            perderVida(1);
         }
-        setEnergiaAtual(getEnergiaAtual() - valor);
-        limitarEnergia();
 
+        limitarEnergia();
     }
 
     public void limitarEnergia() {
         if (getEnergiaAtual() > getEnergiaTotal()) {
             setEnergiaAtual(getEnergiaTotal());
         }
-        if (getEnergiaAtual() < 0) {
+        if (getEnergiaAtual() <= 0) {
             setEnergiaAtual(0);
         }
     }
 
     //-Gerenciando vida-
-    
-    public void receberDano(int valor) {
+    public void perderVida(int valor) {
+        if (valor <= 0) {
+            return;
+        }
         setVidaAtual(getVidaAtual() - valor);
 
         if (getVidaAtual() <= 0) {
             setVivo(false);
         }
+        limitarVida();
+    }
+
+    public void ganharVida(int valor) {
+        if (valor <= 0) {
+            return;
+        }
+        setVidaAtual(getVidaAtual() + valor);
+        limitarVida();
+    }
+
+    public void limitarVida() {
+        if (getVidaAtual() <= 0) {
+            setVidaAtual(0);
+        }
+
+        if (getVidaAtual() > getVidaTotal()) {
+            setVidaAtual(getVidaTotal());
+        }
     }
 
     public String informações() {
-        String info = ("-----------------------" + "\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual() );
+        String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual());
         return info;
     }
 

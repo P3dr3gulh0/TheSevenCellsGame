@@ -1,5 +1,7 @@
 package thesevencells;
 
+import javax.swing.JOptionPane;
+
 public class Mundo {
 
     private int dia;
@@ -25,14 +27,12 @@ public class Mundo {
         getCriatura1().comer(valor);
         getHabitat1().perderRecurso(valor);
     }
-
+    
     public void contagemDia() {
         setDia(getDia() + 1);
 
-        System.out.println("Dia: " + getDia());
-
-        System.out.println(getHabitat1().informações());
-        System.out.println(getCriatura1().informações());
+        JOptionPane.showMessageDialog(null, "Dia: " + getDia() + "\nInformações do Habitat: "+ getHabitat1().informações());
+        JOptionPane.showMessageDialog(null, "Dia: " + getDia() + "\nInformações da Criatura: "+ getCriatura1().informações());
         getCriatura1().perderEnergia(getHabitat1().getDificuldade());
 
     }
