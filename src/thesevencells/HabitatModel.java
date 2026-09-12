@@ -19,28 +19,35 @@ public class HabitatModel {
         this.dificuldade = dificuldade;
     }
 
+    public double fornecerRecursos(double valor){
+        
+        if(getQntrecursosAtual() < valor){
+            valor -= getQntrecursosAtual();
+        }
+        
+        if(getQntrecursosAtual() <= 0){
+            valor = 0;
+        }
+        
+        perderRecurso(valor);
+        return valor;
+    }
+    
+    //--recursos de gerenciamento--
     public void gerarRecurso() {
         if (getQntrecursosAtual() < getQntrecursosTotal()) {
             setQntrecursosAtual(getQntrecursosAtual() + (getTamanho() / getDificuldade()));
-            System.out.println("Habitat " + getNome() + "Gerou um recurso!");
-            limitarRecursos();
-        } else {
-            System.out.println("Habitat " + getNome() + "Chegou ao limite de recursos!");
         }
+        
+        limitarRecursos();
     }
 
-    public void perderRecurso(int valor) {
-        if (getQntrecursosAtual() > 0) {
-            
+    public void perderRecurso(double valor) {
+        if (getQntrecursosAtual() >= 1) {
             setQntrecursosAtual(getQntrecursosAtual() - valor);
-            
-            System.out.println("Habitat " + getNome() + " Perdeu " + valor + " recurso(s)!");
-            
-            limitarRecursos();
-        } else {
-            
-            System.out.println("Habitat sem recursos!");
+            return;
         }
+        limitarRecursos();
     }
 
     public void limitarRecursos() {
@@ -52,7 +59,7 @@ public class HabitatModel {
         }
     }
 
-    public String informações() {
+    public String informacoes() {
         String info = ("\nNome: " + getNome() + "\nRecurso: " + getQntrecursosAtual());
         return info;
     }

@@ -3,26 +3,28 @@ package thesevencells;
 public class CriaturaModel {
 
     private String nome;
-    private int vidaTotal;
-    private int vidaAtual;
-    private int energiaTotal;
-    private int energiaAtual;
+    private double vidaTotal;
+    private double vidaAtual;
+    private double energiaTotal;
+    private double energiaAtual;
     private boolean vivo = true;
 
-    public CriaturaModel(String nome, int vidaTotal, int energiaTotal) {
+    public CriaturaModel(String nome, double vidaTotal, double energiaTotal) {
         this.nome = nome;
         this.vidaTotal = vidaTotal;
-        this.vidaAtual = vidaTotal;
         this.energiaTotal = energiaTotal;
         this.energiaAtual = energiaTotal;
     }
 
+
     //comportamento principal
-    public void comer(int valor) {
+    public void comer(double valor) {
         if (!isVivo()) {
             return;
         }
-        System.out.println("Criatura comeu!");
+        if (valor <= 0) {
+            return;
+        }
         ganharEnergia(valor);
     }
 
@@ -40,7 +42,7 @@ public class CriaturaModel {
 
     //--recursos de gerenciamento--
     //-Gerenciando Energia-
-    public void ganharEnergia(int valor) {
+    public void ganharEnergia(double valor) {
         if (valor <= 0) {
             return;
         }
@@ -103,7 +105,7 @@ public class CriaturaModel {
         }
     }
 
-    public String informações() {
+    public String informacoes() {
         String info = ("\nNome: " + getNome() + " \nVida: " + getVidaAtual() + "\nEnergia: " + getEnergiaAtual());
         return info;
     }
@@ -116,35 +118,35 @@ public class CriaturaModel {
         this.nome = nome;
     }
 
-    public int getVidaTotal() {
+    public double getVidaTotal() {
         return vidaTotal;
     }
 
-    public void setVidaTotal(int vidaTotal) {
+    public void setVidaTotal(double vidaTotal) {
         this.vidaTotal = vidaTotal;
     }
 
-    public int getVidaAtual() {
+    public double getVidaAtual() {
         return vidaAtual;
     }
 
-    public void setVidaAtual(int vidaAtual) {
+    public void setVidaAtual(double vidaAtual) {
         this.vidaAtual = vidaAtual;
     }
 
-    public int getEnergiaTotal() {
+    public double getEnergiaTotal() {
         return energiaTotal;
     }
 
-    public void setEnergiaTotal(int energiaTotal) {
+    public void setEnergiaTotal(double energiaTotal) {
         this.energiaTotal = energiaTotal;
     }
 
-    public int getEnergiaAtual() {
+    public double getEnergiaAtual() {
         return energiaAtual;
     }
 
-    public void setEnergiaAtual(int energiaAtual) {
+    public void setEnergiaAtual(double energiaAtual) {
         this.energiaAtual = energiaAtual;
     }
 
@@ -155,4 +157,5 @@ public class CriaturaModel {
     public void setVivo(boolean vivo) {
         this.vivo = vivo;
     }
+
 }

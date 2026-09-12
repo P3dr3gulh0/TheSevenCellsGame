@@ -5,34 +5,57 @@ import javax.swing.JOptionPane;
 public class Mundo {
 
     private int dia;
-    private HabitatModel Habitat1;
+    private HabitatModel habitat1;
     private CriaturaModel criatura1;
-
+    private String relatorioCriatura = "";
+    private String relatoriohabitat = "";
+    
+    relatorioCriatura = getCriatura1().informacoes();
+    relatoriohabitat = getHabitat1().informacoes();
     public void gerar(HabitatModel habitat1, CriaturaModel criatura1) {
         setCriatura1(criatura1);
         setHabitat1(habitat1);
     }
 
     public void alimentarCriatura() {
-        int valor = 1;
+        double valor = 1;
         if (!getCriatura1().isVivo()) {
-            return;
-        }
-        if (getHabitat1().getQntrecursosAtual() < valor) {
+            setRelatorioCriatura(getRelatorioCriatura() + "\n Dia " + getDia() + "Criatura morreu!");
             return;
         }
         if (getCriatura1().getEnergiaAtual() == getCriatura1().getEnergiaTotal()) {
             return;
         }
+
+        if (receberRecurso(valor) == 0) {
+            setRelatoriohabitat(getRelatoriohabitat() + "\n Dia " + getDia() + " Habitat sem recursos!");
+            return;
+        }
+
         getCriatura1().comer(valor);
-        getHabitat1().perderRecurso(valor);
+        setRelatoriohabitat(getRelatoriohabitat() + "\n Dia " + getDia() + " Habitat Perdeu " + valor + " recursos");
+        setRelatorioCriatura(getRelatorioCriatura() + "\n Dia " + getDia() + " Criatura comeu!");
     }
-    
+
+    public double receberRecurso(double valor) {
+        setRelatoriohabitat(getRelatoriohabitat() + "\n Dia " + getDia() + " Habitat Perdeu " + valor + " recursos");
+
+        return getHabitat1().fornecerRecursos(valor);
+    }
+
+    public void testes() {
+//        getHabitat1().fornecerRecursos(2);
+    }
+
+    public void relatorio() {
+
+        JOptionPane.showMessageDialog(null, getRelatorioCriatura());
+        JOptionPane.showMessageDialog(null, getRelatoriohabitat());
+    }
+
     public void contagemDia() {
         setDia(getDia() + 1);
 
-        JOptionPane.showMessageDialog(null, "Dia: " + getDia() + "\nInformações do Habitat: "+ getHabitat1().informações());
-        JOptionPane.showMessageDialog(null, "Dia: " + getDia() + "\nInformações da Criatura: "+ getCriatura1().informações());
         getCriatura1().perderEnergia(getHabitat1().getDificuldade());
 
     }
@@ -63,12 +86,14 @@ public class Mundo {
     }
 
     public HabitatModel getHabitat1() {
-        return Habitat1;
+        return habitat1;
     }
 
-    public void setHabitat1(HabitatModel Habitat1) {
-        this.Habitat1 = Habitat1;
+    public void setHabitat1(HabitatModel habitat1) {
+        this.habitat1 = habitat1;
     }
+
+
 
     public CriaturaModel getCriatura1() {
         return criatura1;
@@ -77,4 +102,21 @@ public class Mundo {
     public void setCriatura1(CriaturaModel criatura1) {
         this.criatura1 = criatura1;
     }
+
+    public String getRelatorioCriatura() {
+        return relatorioCriatura;
+    }
+
+    public void setRelatorioCriatura(String relatorioCriatura) {
+        this.relatorioCriatura = relatorioCriatura;
+    }
+
+    public String getRelatoriohabitat() {
+        return relatoriohabitat;
+    }
+
+    public void setRelatoriohabitat(String relatoriohabitat) {
+        this.relatoriohabitat = relatoriohabitat;
+    }
+
 }
