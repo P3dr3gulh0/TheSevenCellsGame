@@ -1,7 +1,5 @@
 package thesevencells;
 
-import javax.swing.JOptionPane;
-
 public class Mundo {
 
     private int dia;
@@ -9,16 +7,18 @@ public class Mundo {
     private CriaturaModel criatura1;
     private String relatorioCriatura = "";
     private String relatoriohabitat = "";
-    
-    relatorioCriatura = getCriatura1().informacoes();
-    relatoriohabitat = getHabitat1().informacoes();
+
     public void gerar(HabitatModel habitat1, CriaturaModel criatura1) {
         setCriatura1(criatura1);
         setHabitat1(habitat1);
+        // setRelatorioCriatura(getCriatura1().informacoes());
+        // setRelatoriohabitat(getHabitat1().informacoes());
     }
 
     public void alimentarCriatura() {
         double valor = 1;
+        double alimento = getHabitat1().fornecerRecursos(valor);
+
         if (!getCriatura1().isVivo()) {
             setRelatorioCriatura(getRelatorioCriatura() + "\n Dia " + getDia() + "Criatura morreu!");
             return;
@@ -27,30 +27,25 @@ public class Mundo {
             return;
         }
 
-        if (receberRecurso(valor) == 0) {
+        if (alimento == 0) {
             setRelatoriohabitat(getRelatoriohabitat() + "\n Dia " + getDia() + " Habitat sem recursos!");
             return;
         }
 
-        getCriatura1().comer(valor);
-        setRelatoriohabitat(getRelatoriohabitat() + "\n Dia " + getDia() + " Habitat Perdeu " + valor + " recursos");
-        setRelatorioCriatura(getRelatorioCriatura() + "\n Dia " + getDia() + " Criatura comeu!");
-    }
-
-    public double receberRecurso(double valor) {
-        setRelatoriohabitat(getRelatoriohabitat() + "\n Dia " + getDia() + " Habitat Perdeu " + valor + " recursos");
-
-        return getHabitat1().fornecerRecursos(valor);
+        getCriatura1().comer(alimento);
+        setRelatoriohabitat(getRelatoriohabitat() + getHabitat1().informacoes() + "\n Dia " + getDia() + " Habitat Perdeu " + valor + " recursos");
+        setRelatorioCriatura(getRelatorioCriatura() + getCriatura1().informacoes() + "\n Dia " + getDia() + " Criatura comeu!");
     }
 
     public void testes() {
-//        getHabitat1().fornecerRecursos(2);
+        // getHabitat1().fornecerRecursos(2);
     }
 
     public void relatorio() {
-
-        JOptionPane.showMessageDialog(null, getRelatorioCriatura());
-        JOptionPane.showMessageDialog(null, getRelatoriohabitat());
+        // JOptionPane.showMessageDialog(null, getRelatorioCriatura());
+        // JOptionPane.showMessageDialog(null, getRelatoriohabitat());
+        System.out.println(getRelatorioCriatura());
+        System.out.println(getRelatoriohabitat());
     }
 
     public void contagemDia() {
@@ -67,7 +62,8 @@ public class Mundo {
         this.dia = dia;
     }
 
-    public static HabitatModel gerarHabitats(String nome, int localizacao, int tamanho, double qntrecursos, int dificuldade) {
+    public static HabitatModel gerarHabitats(String nome, int localizacao, int tamanho, double qntrecursos,
+            int dificuldade) {
         HabitatModel habitat = new HabitatModel(nome, localizacao, tamanho, qntrecursos, dificuldade);
         return habitat;
     }
@@ -92,8 +88,6 @@ public class Mundo {
     public void setHabitat1(HabitatModel habitat1) {
         this.habitat1 = habitat1;
     }
-
-
 
     public CriaturaModel getCriatura1() {
         return criatura1;

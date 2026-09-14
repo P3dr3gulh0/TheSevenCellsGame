@@ -12,6 +12,7 @@ public class CriaturaModel {
     public CriaturaModel(String nome, double vidaTotal, double energiaTotal) {
         this.nome = nome;
         this.vidaTotal = vidaTotal;
+        this.vidaAtual = vidaTotal;
         this.energiaTotal = energiaTotal;
         this.energiaAtual = energiaTotal;
     }
@@ -52,7 +53,7 @@ public class CriaturaModel {
         limitarEnergia();
     }
 
-    public void perderEnergia(int valor) {
+    public void perderEnergia(double valor) {
         if (valor < 0) {
             return;
         }

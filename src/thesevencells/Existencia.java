@@ -1,6 +1,5 @@
 package thesevencells;
 
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Existencia {
@@ -12,11 +11,12 @@ public class Existencia {
 
         mundo1.gerar(habitat1, criatura1);
 
-        while (mundo1.getCriatura1().isVivo()) {
-            mundo1.contagemDia();
-            mundo1.alimentarCriatura();
+        // while (mundo1.getCriatura1().isVivo()) {
+        //     mundo1.contagemDia();
+        //     mundo1.alimentarCriatura();
             
-        }
-        mundo1.relatorio();
+        // }
+        // mundo1.relatorio();
+         JOptionPane.showMessageDialog(null, (Double.toString(mundo1.getHabitat1().fornecerRecursos(1))) );
     }
 }

@@ -19,18 +19,22 @@ public class HabitatModel {
         this.dificuldade = dificuldade;
     }
 
-    public double fornecerRecursos(double valor){
+    public double fornecerRecursos(double valorSolicitado){
         
-        if(getQntrecursosAtual() < valor){
-            valor -= getQntrecursosAtual();
+        double valorEnviado = 0;
+        if(getQntrecursosAtual() == 0){
+            return 0;
         }
-        
-        if(getQntrecursosAtual() <= 0){
-            valor = 0;
+
+        if(getQntrecursosAtual() > valorSolicitado){
+            valorEnviado = valorSolicitado;
         }
-        
-        perderRecurso(valor);
-        return valor;
+
+        if(getQntrecursosAtual() < valorSolicitado){
+            valorEnviado = getQntrecursosAtual();
+        }
+        perderRecurso(valorEnviado);
+        return valorEnviado;
     }
     
     //--recursos de gerenciamento--
@@ -43,7 +47,7 @@ public class HabitatModel {
     }
 
     public void perderRecurso(double valor) {
-        if (getQntrecursosAtual() >= 1) {
+        if (getQntrecursosAtual() > 0) {
             setQntrecursosAtual(getQntrecursosAtual() - valor);
             return;
         }
